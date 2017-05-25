@@ -40,8 +40,10 @@ public class Quick_Find {
 		int pid = id[p];
 		int qid = id[q];
 		for (int i = 0; i < id.length; i++)
+		{
 			if (id[i] == pid)
 				id[i] = qid;
+		}
 	}
 	
 	public int count()
