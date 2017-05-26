@@ -1,5 +1,5 @@
-import java.util.Arrays;
-import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Quick_Find {
 
@@ -37,13 +37,17 @@ public class Quick_Find {
 		validate(p);
 		validate(q);
 		
+		if ( id[p] == id[q] ) return;
+		
 		int pid = id[p];
 		int qid = id[q];
+		
 		for (int i = 0; i < id.length; i++)
 		{
 			if (id[i] == pid)
 				id[i] = qid;
 		}
+		--counter;
 	}
 	
 	public int count()

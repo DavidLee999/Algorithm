@@ -41,7 +41,7 @@ public class QuickUnion {
 		validate(p);
 		validate(q);
 		
-		return (findRoot(p) == findRoot(q));
+		return ( findRoot(p) == findRoot(q) );
 	}
 	
 	public void union(int p, int q){
@@ -79,6 +79,8 @@ public class QuickUnion {
 			
 			StdOut.println("now, " + p + " and " + q + " is connected.");
 		}
+		
+		StdOut.println("There are " + qf.count() + " components.");
 
 	}
 
