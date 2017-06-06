@@ -41,7 +41,7 @@ public class QuickUnion {
 		validate(p);
 		validate(q);
 		
-		return ( findRoot(p) == findRoot(q) );
+		return (findRoot(p) == findRoot(q));
 	}
 	
 	public void union(int p, int q){
@@ -66,6 +66,8 @@ public class QuickUnion {
 		
 		QuickUnion uq = new QuickUnion(N);
 		
+		long startTime=System.currentTimeMillis();
+		
 		while(!StdIn.isEmpty()){
 			int p = StdIn.readInt();
 			int q = StdIn.readInt();
@@ -79,9 +81,10 @@ public class QuickUnion {
 			
 			StdOut.println("now, " + p + " and " + q + " is connected.");
 		}
-		
-		StdOut.println("There are " + qf.count() + " components.");
 
+		long endTime=System.currentTimeMillis(); 
+		
+		System.out.println("run time: " + (endTime - startTime) + "ms");
 	}
 
 }

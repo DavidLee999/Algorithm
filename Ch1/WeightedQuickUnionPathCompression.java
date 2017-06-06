@@ -1,13 +1,13 @@
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class WeightedQuickUnion {
+public class WeightedQuickUnionPathCompression {
 
 	private int[] parents;
 	private int counter;
 	private int[] sz;
 	
-	public WeightedQuickUnion (int n) {
+	public WeightedQuickUnionPathCompression (int n) {
 		
 		counter = n;
 		
@@ -37,9 +37,12 @@ public class WeightedQuickUnion {
 	
 	private int findRoot (int p) {
 		
-		while  ( p != parents[p] )
+		while  ( p != parents[p] ){
 			
+			parents[p] = parents[parents[p]];
+		
 			p = parents[p];
+		}
 		
 		return p;
 	}
@@ -88,12 +91,12 @@ public class WeightedQuickUnion {
 
 		int n = StdIn.readInt();
 		
-		WeightedQuickUnion wqu = new WeightedQuickUnion(n);
+		WeightedQuickUnionPathCompression wqu = new WeightedQuickUnionPathCompression(n);
 		
 		long startTime=System.currentTimeMillis();
 		
 		while(!StdIn.isEmpty()){
-			
+ 
 			int p = StdIn.readInt();
 			int q = StdIn.readInt();
 			
@@ -105,8 +108,9 @@ public class WeightedQuickUnion {
 			wqu.union(p, q);
 			
 			StdOut.println(p + " " + q + " is unioned");
+			
 		}
-
+		
 		long endTime=System.currentTimeMillis(); 
 		
 		System.out.println("run time: " + (endTime - startTime) + "ms");
