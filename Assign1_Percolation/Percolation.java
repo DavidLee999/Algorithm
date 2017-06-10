@@ -88,14 +88,16 @@ public class Percolation {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int n = StdIn.readInt();
+		In in = new In("E:\\programmingExercise\\algorithm\\Java\\Ch1\\Percolations\\test_files\\wayne98.txt");
+		
+		int n = in.readInt();
 		Percolation uf = new Percolation(n);
 		
 		long startTime=System.currentTimeMillis();
 		
-        while (!StdIn.isEmpty()) {
-            int p = StdIn.readInt();
-            int q = StdIn.readInt();
+        while (!in.isEmpty()) {
+            int p = in.readInt();
+            int q = in.readInt();
             if (uf.isOpen(p, q)) continue;
             uf.open(p, q);
             StdOut.println(p + " " + q);
