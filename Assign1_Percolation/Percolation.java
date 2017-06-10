@@ -91,6 +91,8 @@ public class Percolation {
 		int n = StdIn.readInt();
 		Percolation uf = new Percolation(n);
 		
+		long startTime=System.currentTimeMillis();
+		
         while (!StdIn.isEmpty()) {
             int p = StdIn.readInt();
             int q = StdIn.readInt();
@@ -98,7 +100,10 @@ public class Percolation {
             uf.open(p, q);
             StdOut.println(p + " " + q);
         }
-        
+		
+        System.out.println(uf.isPercolated());
+        long endTime=System.currentTimeMillis(); 
+		
         System.out.println(uf.isPercolated());
 	}
 
