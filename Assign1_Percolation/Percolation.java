@@ -81,7 +81,7 @@ public class Percolation {
 		return wqu.connected( top, xy2id(row, col) );
 	}
 	
-	public boolean isPercolated()
+	public boolean percolates()
 	{
 		return wqu.connected(top, bottom);
 	}
@@ -104,7 +104,7 @@ public class Percolation {
         System.out.println(uf.isPercolated());
         long endTime=System.currentTimeMillis(); 
 		
-        System.out.println(uf.isPercolated());
+        System.out.println(uf.percolates());
 	}
 
 }
