@@ -88,14 +88,18 @@ public class Percolation {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int n = 10;
-		WeightedQuickUnionUF qu = new WeightedQuickUnionUF(n);
+		int n = StdIn.readInt();
+		Percolation uf = new Percolation(n);
 		
-		System.out.println(qu.count());
-		
-		Percolation p = new Percolation(-3);
-		
-		//System.out.println(p.grid[0][1]);
+        while (!StdIn.isEmpty()) {
+            int p = StdIn.readInt();
+            int q = StdIn.readInt();
+            if (uf.isOpen(p, q)) continue;
+            uf.open(p, q);
+            StdOut.println(p + " " + q);
+        }
+        
+        System.out.println(uf.isPercolated());
 	}
 
 }
