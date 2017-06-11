@@ -102,6 +102,7 @@ public class Percolation {
             uf.open(p, q);
             StdOut.println(p + " " + q);
         }
+		in.close();
 		
         System.out.println(uf.isPercolated());
         long endTime=System.currentTimeMillis(); 
