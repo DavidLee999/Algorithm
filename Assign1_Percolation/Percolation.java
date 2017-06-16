@@ -1,26 +1,36 @@
+//import edu.princeton.cs.algs4.In;
+//import edu.princeton.cs.algs4.StdIn;
+//import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 
 	private boolean[][] grid;
 	private int size;
-	private int top = 0;
+	private int top;
 	private int bottom;
+	private int counter;
 	private WeightedQuickUnionUF wqu;
 	
 	
 	Percolation(int N)
 	{
-		if ( N <= 0)
+		if ( N <= 0 )
 			throw new IllegalArgumentException("The size must be bigger than 0.");
 		
 		size = N;
+		
+		top = 0;
 		
 		bottom = size * size + 1;
 		
 		grid = new boolean[size][size];
 		
+		counter = 0;
+		
 		wqu = new WeightedQuickUnionUF(size * size + 2);
 	}
+	
 	private boolean validate( int p )
 	{
 		if ( p < 1 || p > size)
@@ -46,11 +56,13 @@ public class Percolation {
 		
 		grid[row-1][col-1] = true;
 		
+		counter++;
+		
 		if ( row == 1 )
 			wqu.union(id, top);
 		
 		if ( row == size )
-			wqu.union(id, top);
+			wqu.union(id, bottom);
 		
 		if ( validate(row-1) && isOpen(row-1, col) )
 			wqu.union( id, xy2id(row-1, col) );
@@ -81,6 +93,8 @@ public class Percolation {
 		return wqu.connected( top, xy2id(row, col) );
 	}
 	
+	public int numberOfOpenSites() { return counter; }
+	
 	public boolean percolates()
 	{
 		return wqu.connected(top, bottom);
@@ -88,9 +102,11 @@ public class Percolation {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		In in = new In("E:\\programmingExercise\\algorithm\\Java\\Ch1\\Percolations\\test_files\\wayne98.txt");
+		/* In in = new In("E:\\programmingExercise\\algorithm\\Java\\Ch1\\Percolations\\test_files\\wayne98.txt");
 		
 		int n = in.readInt();
+		//int n = StdIn.readInt();
+		
 		Percolation uf = new Percolation(n);
 		
 		long startTime=System.currentTimeMillis();
@@ -102,12 +118,12 @@ public class Percolation {
             uf.open(p, q);
             StdOut.println(p + " " + q);
         }
-		in.close();
-		
-        System.out.println(uf.isPercolated());
+        //System.out.println(uf.wqu.connected(0, 3));
+        in.close();
+        System.out.println(uf.percolates());
         long endTime=System.currentTimeMillis(); 
 		
-        System.out.println(uf.percolates());
+		System.out.println("run time: " + (endTime - startTime) + "ms"); */
 	}
 
 }
