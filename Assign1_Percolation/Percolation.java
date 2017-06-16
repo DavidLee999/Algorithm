@@ -1,6 +1,3 @@
-//import edu.princeton.cs.algs4.In;
-//import edu.princeton.cs.algs4.StdIn;
-//import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
@@ -101,29 +98,7 @@ public class Percolation {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		/* In in = new In("E:\\programmingExercise\\algorithm\\Java\\Ch1\\Percolations\\test_files\\wayne98.txt");
 		
-		int n = in.readInt();
-		//int n = StdIn.readInt();
-		
-		Percolation uf = new Percolation(n);
-		
-		long startTime=System.currentTimeMillis();
-		
-        while (!in.isEmpty()) {
-            int p = in.readInt();
-            int q = in.readInt();
-            if (uf.isOpen(p, q)) continue;
-            uf.open(p, q);
-            StdOut.println(p + " " + q);
-        }
-        //System.out.println(uf.wqu.connected(0, 3));
-        in.close();
-        System.out.println(uf.percolates());
-        long endTime=System.currentTimeMillis(); 
-		
-		System.out.println("run time: " + (endTime - startTime) + "ms"); */
 	}
 
 }
