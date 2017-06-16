@@ -31,8 +31,8 @@ public class PercolationStats {
 		//int conter = 0;
 		while ( !pr.percolates() )
 		{
-			int p = StdRandom.uniform( 0, size );
-			int q = StdRandom.uniform( 0, size );
+			int p = StdRandom.uniform( 1, size + 1 );
+			int q = StdRandom.uniform( 1, size + 1 );
 			
 			if ( !pr.isOpen( p, q ) )
 				pr.open( p, q );
@@ -46,7 +46,7 @@ public class PercolationStats {
 		{
 			pr = new Percolation( size );
 			randPercolates();
-			f[ counter ] = (double)( pr.numberOfOpenSites() / ( size * size ) );
+			f[ counter ] = (double)( pr.numberOfOpenSites() ) / ( size * size ) ;
 			
 			counter++;
 		}
