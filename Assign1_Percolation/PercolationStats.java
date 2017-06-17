@@ -19,7 +19,7 @@ public class PercolationStats {
 		
 		// num = trials;
 		
-		//pr = new Percolation( size );
+		// pr = new Percolation( size );
 		
 		f = new double[trials];
 		
@@ -80,7 +80,7 @@ public class PercolationStats {
 		int n = Integer.parseInt(args[0]);
 		int trials = Integer.parseInt(args[1]);
 		
-		PercolationStats PS = new PercolationStats(n, trials);
+		PercolationStats PS = new PercolationStats(n, trials);
 		
 		StdOut.printf("Mean                    = %1.16f%n", PS.mean());
 		StdOut.printf("Stddev                  = %1.16f%n", PS.stddev());
