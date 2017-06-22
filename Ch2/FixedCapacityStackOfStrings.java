@@ -22,7 +22,6 @@ public class FixedCapacityStackOfStrings {
 	{ s[N++] = item; }
 	
 	public String pop()
-	public String pop()
 	{ 
 		String item = s[--N];
 		s[N] = null;
