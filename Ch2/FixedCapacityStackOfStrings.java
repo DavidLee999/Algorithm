@@ -36,9 +36,7 @@ public class FixedCapacityStackOfStrings {
 					System.out.println( "Empty!" );
 				else
 					System.out.println( st.pop() );
-			}
-			else if ( s.equals("?") )
-				System.out.println( st.isEmpty() );				
+			}			
 			else
 				st.push( s );
 		}
