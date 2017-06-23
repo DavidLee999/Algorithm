@@ -6,7 +6,7 @@ public class ResizingArrayStackOfStrings {
 	
 	private void resize( int length )
 	{
-		String new_s = new String[length];
+		String[] new_s = new String[length];
 		
 		for ( int i = 0; i < N; i++ )
 			new_s[i] = s[i];
