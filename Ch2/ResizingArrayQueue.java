@@ -20,7 +20,7 @@ public class ResizingArrayQueue{
         last = n;
     }
     public ResizingArrayQueue(){
-        arr = new String[2];
+        arr = new String[2]; // initialization with length 2
         first = 0;
         last = 0;
         n = 0;
@@ -40,7 +40,7 @@ public class ResizingArrayQueue{
         arr[last++] = item;
         n++;
 
-        if( last == n )
+        if( last == arr.length ) // warp up to use empty spaces
             last = 0;
     }
 
@@ -53,7 +53,7 @@ public class ResizingArrayQueue{
         arr[first++] = null;
         n--;
 
-        if( first == n )
+        if( first == arr.length ) // warp up to use empty space
             first = 0;
 
         if( n > 0 && n == arr.length / 4 )
