@@ -47,7 +47,7 @@ public class Quick_Find {
 			if (id[i] == pid)
 				id[i] = qid;
 		}
-		--counter;
+		--count;
 	}
 	
 	public int count()
