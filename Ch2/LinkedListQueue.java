@@ -4,8 +4,8 @@ import edu.princeton.cs.algs4.StdIn;
 public class LinkedListQueue{
 
     private class Node{
-        String data;
-        Node next;
+        private String data;
+        private Node next;
     }
 
     private Node first, last;
