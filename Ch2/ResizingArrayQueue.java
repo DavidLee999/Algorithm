@@ -1,16 +1,31 @@
 import edu.princeton.cs.algs4.StdIn;
+import java.util.Iterator;
 
+public class ResizingArrayQueue<Item> implements Iterable<Item> {
 
-public class ResizingArrayQueue{
-
-    private String[] arr;
+    private Item[] arr;
     private int n;
     private int first;
     private int last;
 
+    private class ArrayIterator implements Iterator<Item> {
+        private int i = 0;
+
+        public boolean hasNext() { return i < n; }
+
+        public Item next()
+        {
+            Item item = arr[(first + i) % arr.length];
+            i++;
+
+            return item;
+        }
+
+        public void remove() { throw new UnsupportedOperationException(); }
+    }
     private void resize( int capacity )
     {
-        String[] newarr = new String[capacity];
+        Item[] newarr = (Item[]) new Object[capacity];
 
         for( int i = 0; i < n; ++i )
             newarr[i] = arr[(first + i) % arr.length];
@@ -20,7 +35,7 @@ public class ResizingArrayQueue{
         last = n;
     }
     public ResizingArrayQueue(){
-        arr = new String[2]; // initialization with length 2
+        arr = (Item[]) new Object[2]; // initialization with length 2
         first = 0;
         last = 0;
         n = 0;
@@ -32,7 +47,7 @@ public class ResizingArrayQueue{
     public int size()
     { return n; }
 
-    public void enqueue( String item )
+    public void enqueue( Item item )
     {
         if( n == arr.length )
             resize( 2*arr.length );
@@ -44,12 +59,12 @@ public class ResizingArrayQueue{
             last = 0;
     }
 
-    public String dequeue()
+    public Item dequeue()
     {
         if( isEmpty() )
             throw new IndexOutOfBoundsException("Queue underflow");
 
-        String item = arr[first];
+        Item item = arr[first];
         arr[first++] = null;
         n--;
 
@@ -60,6 +75,11 @@ public class ResizingArrayQueue{
             resize( arr.length / 2 );
 
         return item;
+    }
+
+    public Iterator<Item> iterator()
+    {
+        return new ArrayIterator();
     }
 
 
