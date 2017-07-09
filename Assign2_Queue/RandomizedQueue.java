@@ -4,12 +4,12 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
-	private Item[] arr;
-	private int n;
-	private int last;
+    private Item[] arr;
+    private int n;
+    private int last;
 
-	private void resize( int newCapacity )
-	{
+    private void resize( int newCapacity )
+    {
         Item[] newarr = (Item[]) new Object[newCapacity];
 
         for( int i = 0; i < n; ++i )
@@ -96,15 +96,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int index = StdRandom.uniform(n);
 
         return arr[index];
-        }
+    }
 
-	@Override
-	public Iterator<Item> iterator()
-	{
+    @Override
+    public Iterator<Item> iterator()
+    {
         return new RandomizedIterator();
-	}
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-	}
+    }
 }
