@@ -5,17 +5,8 @@ import edu.princeton.cs.algs4.StdIn;
 public class MergeBU {
     private MergeBU() {};
 
-    private static final int CUTOFF = 7;
-
-    private static void exch( Object[] a, int i, int j )
-    {
-        Object swap = a[i];
-        a[i] = a[j];
-        a[j] = swap;
-    }
     private static boolean less( Comparable v, Comparable w )
     { return v.compareTo( w ) < 0; }
-
     private static boolean isSorted( Comparable[] a, int lo, int hi )
     {
         for( int i = lo + 1; i <= hi; ++i )
@@ -53,40 +44,17 @@ public class MergeBU {
         assert isSorted( a, lo, hi );
     }
 
-    private static void insertionSort( Comparable[] a, int lo, int hi )
+    private static void sort( Comparable[] a )
     {
-        for( int i = lo + 1; i <= hi; ++i )
+        int N = a.length;
+
+        Comparable[] aux = new Comparable[N];
+
+        for( int sz = 1; sz < N; sz += sz )
         {
-            for( int j = i; j > lo && less( a[j], a[j-1] ); --j )
-                exch( a, j, j-1 );
+            for( int lo = 0; lo < N - sz; lo += sz + sz )
+                merge( a, aux, lo, lo + sz - 1, Math.min( lo + sz + sz - 1, N - 1) );
         }
-    }
-
-    private static void sort( Comparable[] a, Comparable[] aux, int lo, int hi )
-    {
-        if( hi <= lo + CUTOFF -  1 )
-        {
-            insertionSort( aux, lo, hi );
-            return;
-        }
-
-        int mid = lo + ( hi - lo ) / 2;
-        sort( aux, a, lo, mid );
-        sort( aux, a, mid + 1, hi );
-
-        if( less( a[mid], a[mid+1] ) )
-        {
-            System.arraycopy( a, lo, aux, lo, hi - lo + 1 );
-            return;
-        }
-
-        merge( a, aux, lo, mid, hi );
-    }
-
-    public static void sort( Comparable[] a )
-    {
-        Comparable[] aux = a.clone();
-        sort( aux, a, 0, a.length - 1 );
 
         assert isSorted( a );
     }
