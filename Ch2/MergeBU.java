@@ -2,8 +2,8 @@ import java.util.Comparator;
 import edu.princeton.cs.algs4.StdIn;
 
 
-public class MergeX {
-    private MergeX() {};
+public class MergeBU {
+    private MergeBU() {};
 
     private static final int CUTOFF = 7;
 
@@ -35,19 +35,22 @@ public class MergeX {
         assert isSorted( a, lo, mid );
         assert isSorted( a, mid + 1, hi );
 
+        for( int k = lo; k <= hi; ++k )
+            aux[k] = a[k];
+
         int i = lo, j = mid + 1, k = lo;
         while( k <= hi ) {
             if( i > mid )
-                aux[k++] = a[j++];
+                a[k++] = aux[j++];
             else if( j > hi )
-                aux[k++] = a[i++];
-            else if( less( a[j], a[i] ) )
-                aux[k++] = a[j++];
+                a[k++] = aux[i++];
+            else if( less( aux[j], aux[i] ) )
+                a[k++] = aux[j++];
             else
-                aux[k++] = a[i++];
+                a[k++] = aux[i++];
         }
 
-        assert isSorted( aux, lo, hi );
+        assert isSorted( a, lo, hi );
     }
 
     private static void insertionSort( Comparable[] a, int lo, int hi )
@@ -61,7 +64,7 @@ public class MergeX {
 
     private static void sort( Comparable[] a, Comparable[] aux, int lo, int hi )
     {
-        if( hi <= lo + CUTOFF )
+        if( hi <= lo + CUTOFF -  1 )
         {
             insertionSort( aux, lo, hi );
             return;
@@ -71,7 +74,7 @@ public class MergeX {
         sort( aux, a, lo, mid );
         sort( aux, a, mid + 1, hi );
 
-        if( !less( a[mid+1], a[mid] ) )
+        if( less( a[mid], a[mid+1] ) )
         {
             System.arraycopy( a, lo, aux, lo, hi - lo + 1 );
             return;
@@ -97,7 +100,7 @@ public class MergeX {
     public static void main(String[] args)
     {
         String[] a = StdIn.readAllStrings();
-        MergeX.sort( a );
+        Merge.sort( a );
         show( a );
     }
 }
