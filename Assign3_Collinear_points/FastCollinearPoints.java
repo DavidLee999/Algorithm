@@ -35,7 +35,7 @@ public class FastCollinearPoints {
         for( int i = 0; i < n; ++i )
         {
             Point p = points[i];
-            Point[] pointsBySlope = pointsByCoords.clone();
+            Point[] pointsBySlope = pointsByCoords.clone(); // first sorted by coordinates
 
             Arrays.sort( pointsBySlope, p.slopeOrder() );
 
@@ -93,5 +93,6 @@ public class FastCollinearPoints {
             l.draw();
         }
 
+        StdDraw.show();
     }
 }
