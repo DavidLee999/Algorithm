@@ -1,5 +1,8 @@
 import java.util.Arrays;
 import java.util.ArrayList;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdDraw;
 
 public class BruteCollinearPoints {
 
@@ -31,7 +34,6 @@ public class BruteCollinearPoints {
         for( int a = 0; a < n - 3; ++a )
         {
             Point pointA = sortedPoints[a];
-
             for( int b = a + 1; b < n - 2; ++b )
             {
                 Point pointB = sortedPoints[b];
@@ -68,5 +70,36 @@ public class BruteCollinearPoints {
     { return lines.clone(); }
 
     public static void main(String[] args)
-    {}
+    {
+        In in = new In( args[0] );
+
+        int n = in.readInt();
+        Point[] p = new Point[n];
+        for( int i = 0; i < n; ++i )
+        {
+            int x = in.readInt();
+            int y = in.readInt();
+
+            p[i] = new Point( x, y );
+        }
+
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setXscale( 0, 32786 );
+        StdDraw.setYscale( 0, 32786 );
+
+        for(Point q : p)
+            q.draw();
+
+        StdDraw.show();
+
+        BruteCollinearPoints collinear = new BruteCollinearPoints( p );
+
+        for( LineSegment l : collinear.segments() )
+        {
+            StdOut.println( l );
+            l.draw();
+        }
+
+        StdDraw.show();
+    }
 }
