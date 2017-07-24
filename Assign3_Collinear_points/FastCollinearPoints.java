@@ -1,15 +1,16 @@
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedList;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
 
-public class BruteCollinearPoints {
-
+public class FastCollinearPoints {
     private LineSegment[] lines;
 
-    public BruteCollinearPoints(Point[] points)
+    public FastCollinearPoints( Point[] points )
     {
+
         if( points == null )
             throw new IllegalArgumentException( "The array Points is null!" );
 
@@ -19,48 +20,41 @@ public class BruteCollinearPoints {
                 throw new IllegalArgumentException( "The array Points contains null elements!" );
         }
 
-        Point[] sortedPoints = points.clone();
-        Arrays.sort( sortedPoints );
+        Point[] pointsByCoords = points.clone();
+        Arrays.sort( pointsByCoords );
 
-        for( int i = 1; i < points.length; ++i )
+        for( int i = 1; i < pointsByCoords.length; ++i )
         {
-            if( sortedPoints[i].compareTo( sortedPoints[i-1] ) == 0 )
+            if( pointsByCoords[i].compareTo( pointsByCoords[i-1] ) == 0 )
                 throw new IllegalArgumentException( "the array Points contains repeated points!" );
         }
 
         int n = points.length;
-        ArrayList<LineSegment> l = new ArrayList<LineSegment>();
+        List<LineSegment> l = new LinkedList<>();
 
-        for( int a = 0; a < n - 3; ++a )
+        for( int i = 0; i < n; ++i )
         {
-            Point pointA = sortedPoints[a];
-            for( int b = a + 1; b < n - 2; ++b )
-            {
-                Point pointB = sortedPoints[b];
-                double slopeAB = pointA.slopeTo( pointB );
+            Point p = points[i];
+            Point[] pointsBySlope = pointsByCoords.clone();
 
-                for( int c = b + 1; c < n - 1; ++c )
-                {
-                    Point pointC = sortedPoints[c];
-                    double slopeAC = pointA.slopeTo( pointC );
+            Arrays.sort( pointsBySlope, p.slopeOrder() );
 
-                    if( slopeAB == slopeAC )
-                    {
-                        for( int d = c + 1; d < n; ++d )
-                        {
-                            Point pointD = sortedPoints[d];
-                            double slopeAD = pointA.slopeTo( pointD );
+            int j = 1;
+            while( j < n ){
+                LinkedList<Point> candidates = new LinkedList<Point>();
+                final double REF = p.slopeTo( pointsBySlope[j] );
 
-                            if( slopeAB ==  slopeAD )
-                                l.add( new LineSegment( pointA, pointD ) );
-                        }
-                    }
-                }
+                do {
+                    candidates.add( pointsBySlope[j++] );
+                } while( j < n && p.slopeTo( pointsBySlope[j] ) == REF );
 
+                if( candidates.size() >= 3 && p.compareTo( candidates.peek() ) < 0 )
+                    l.add( new LineSegment( p, candidates.peekLast() ) );
             }
         }
 
         lines = l.toArray( new LineSegment[0] );
+
     }
 
     public int numberOfSegments()
@@ -92,14 +86,12 @@ public class BruteCollinearPoints {
 
         StdDraw.show();
 
-        BruteCollinearPoints collinear = new BruteCollinearPoints( p );
-
+        FastCollinearPoints collinear = new FastCollinearPoints( p );
         for( LineSegment l : collinear.segments() )
         {
             StdOut.println( l );
             l.draw();
         }
 
-        StdDraw.show();
     }
 }
