@@ -1,6 +1,5 @@
 import java.util.Arrays;
-import java.util.List;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
@@ -30,11 +29,11 @@ public class FastCollinearPoints {
         }
 
         int n = points.length;
-        List<LineSegment> l = new LinkedList<>();
+        ArrayList<LineSegment> l = new ArrayList<>();
 
         for( int i = 0; i < n; ++i )
         {
-            Point p = points[i];
+            Point p = pointsByCoords[i];
             Point[] pointsBySlope = pointsByCoords.clone(); // first sorted by coordinates
 
             Arrays.sort( pointsBySlope, p.slopeOrder() );
@@ -45,14 +44,14 @@ public class FastCollinearPoints {
 
             int j = 1;
             while( j < n ) {
-                LinkedList<Point> candidates = new LinkedList<Point>();
+                ArrayList<Point> candidates = new ArrayList<Point>();
                 final double REF = slopeP[j];
                 do{
                     candidates.add( pointsBySlope[j++] );
                 }while( j < n && slopeP[j] == REF );
 
-                if( candidates.size() >= 3 && p.compareTo( candidates.peek() ) < 0)
-                    l.add( new LineSegment( p, candidates.peekLast() ) );
+                if( candidates.size() >= 3 && p.compareTo( candidates.get(0) ) < 0)
+                    l.add( new LineSegment( p, candidates.get(candidates.size() - 1 ) ) );
             }
         }
 
