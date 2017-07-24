@@ -37,7 +37,7 @@ public class Point implements Comparable<Point> {
         public int compare( Point p1, Point p2 )
         {
             double slope10 = p1.slopeTo( p );
-            double slope20 = p2.slopeTp( p );
+            double slope20 = p2.slopeTo( p );
 
             return ( slope10 == slope20 ) ? 0 : ( ( slope10 > slope20 ) ? 1 : -1 );
         }
@@ -76,11 +76,12 @@ public class Point implements Comparable<Point> {
     public double slopeTo(Point that) {
         /* YOUR CODE HERE */
         if( this.x == that.x )
-            return ( this.y == that.y ) ? Double.NEGEATIVE_INFINITY : Double.POSITIVE_INFITIVE;
+            return ( this.y == that.y ) ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
+
         if( this.y == that.y )
             return 0.0;
 
-        return double( ( that.y - this.y ) / ( that.x - that.x ) );
+        return ( double ) (( that.y - this.y ) / ( that.x - this.x ));
     }
 
     /**
@@ -97,7 +98,7 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
-        return ( this.y == that.y ) ? return this.x - that.x : this.y - that.y;
+        return ( this.y == that.y ) ? this.x - that.x : this.y - that.y;
     }
 
     /**
