@@ -39,16 +39,19 @@ public class FastCollinearPoints {
 
             Arrays.sort( pointsBySlope, p.slopeOrder() );
 
+            double[] slopeP = new double[n];
+            for( int j = 0; j < n; ++j )
+                slopeP[j] = p.slopeTo( pointsBySlope[j] );
+
             int j = 1;
-            while( j < n ){
+            while( j < n ) {
                 LinkedList<Point> candidates = new LinkedList<Point>();
-                final double REF = p.slopeTo( pointsBySlope[j] );
-
-                do {
+                final double REF = slopeP[j];
+                do{
                     candidates.add( pointsBySlope[j++] );
-                } while( j < n && p.slopeTo( pointsBySlope[j] ) == REF );
+                }while( j < n && slopeP[j] == REF );
 
-                if( candidates.size() >= 3 && p.compareTo( candidates.peek() ) < 0 )
+                if( candidates.size() >= 3 && p.compareTo( candidates.peek() ) < 0)
                     l.add( new LineSegment( p, candidates.peekLast() ) );
             }
         }
