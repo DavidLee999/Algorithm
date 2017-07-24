@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class BruteCollinearPoints {
 
-    private final LineSegment[] lines;
+    private LineSegment[] lines;
 
     public BruteCollinearPoints(Point[] points)
     {
@@ -16,8 +16,8 @@ public class BruteCollinearPoints {
                 throw new IllegalArgumentException( "The array Points contains null elements!" );
         }
 
-        Points[] sortedPoints = points.clone();
-        Array.sort( sortedPoints );
+        Point[] sortedPoints = points.clone();
+        Arrays.sort( sortedPoints );
 
         for( int i = 1; i < points.length; ++i )
         {
@@ -40,7 +40,7 @@ public class BruteCollinearPoints {
                 for( int c = b + 1; c < n - 1; ++c )
                 {
                     Point pointC = sortedPoints[c];
-                    double slopeAC = pointA.slopeTo( PointC );
+                    double slopeAC = pointA.slopeTo( pointC );
 
                     if( slopeAB == slopeAC )
                     {
@@ -53,12 +53,12 @@ public class BruteCollinearPoints {
                                 l.add( new LineSegment( pointA, pointD ) );
                         }
                     }
+                }
 
             }
         }
 
         lines = l.toArray( new LineSegment[0] );
-
     }
 
     public int numberOfSegments()
@@ -66,4 +66,7 @@ public class BruteCollinearPoints {
 
     public LineSegment[] segments()
     { return lines.clone(); }
+
+    public static void main(String[] args)
+    {}
 }
