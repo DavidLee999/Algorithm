@@ -28,6 +28,21 @@ public class Point implements Comparable<Point> {
         this.y = y;
     }
 
+    private class SlopeComparator implements Comparator<Point>
+    {
+        private final Point p;
+
+        public SlopeComparator( Point that ){ p = that; }
+
+        public int compare( Point p1, Point p2 )
+        {
+            double slope10 = p1.slopeTo( p );
+            double slope20 = p2.slopeTp( p );
+
+            return ( slope10 == slope20 ) ? 0 : ( ( slope10 > slope20 ) ? 1 : -1 );
+        }
+    }
+
     /**
      * Draws this point to standard draw.
      */
@@ -60,6 +75,12 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         /* YOUR CODE HERE */
+        if( this.x == that.x )
+            return ( this.y == that.y ) ? Double.NEGEATIVE_INFINITY : Double.POSITIVE_INFITIVE;
+        if( this.y == that.y )
+            return 0.0;
+
+        return double( ( that.y - this.y ) / ( that.x - that.x ) );
     }
 
     /**
@@ -76,6 +97,7 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
+        return ( this.y == that.y ) ? return this.x - that.x : this.y - that.y;
     }
 
     /**
@@ -86,6 +108,7 @@ public class Point implements Comparable<Point> {
      */
     public Comparator<Point> slopeOrder() {
         /* YOUR CODE HERE */
+        return new SlopeComparator( this );
     }
 
 
