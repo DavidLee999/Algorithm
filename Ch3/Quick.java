@@ -1,6 +1,5 @@
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
 
 public class Quick {
     private Quick() {}
@@ -109,7 +108,7 @@ public class Quick {
         for( int i = 0; i < a.length; i++)
         {
             String ith = (String) Quick.select( a, i );
-            StdOut.println( i + "th: " +  ith );
+            System.out.println( i + "th: " +  ith );
         }
     }
 }
