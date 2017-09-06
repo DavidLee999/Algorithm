@@ -221,8 +221,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         Node x = h.left;
         h.left = x.right;
         x.right = h;
-        x.color = x.left.color;
-        x.left.color = RED;
+        x.color = x.right.color;
+        x.right.color = RED;
         x.size = h.size;
         h.size = 1 + size(h.right) + size(h.left);
 
@@ -230,7 +230,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     private Node rotateLeft(Node h)
-    {
+   {
         Node x = h.right;
         h.right = x.left;
         x.left = h;
