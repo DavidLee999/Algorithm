@@ -483,7 +483,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         if (lo.compareTo(hi) > 0)
             return 0;
         if (contains(hi))
-            return rank(hi) - rank(lo) - 1;
+            return rank(hi) - rank(lo) + 1;
         else
             return rank(hi) - rank(lo);
     }
