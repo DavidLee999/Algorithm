@@ -120,32 +120,19 @@ public class KdTree {
 	public void draw()
 	{
 		// to-do
-		draw(root, 0);
+		draw(root);
 	}
 	
-	private void draw(Node x, int level)
+	private void draw(Node x)
 	{
-		if (x != null)
-		{
-            draw(x.left, level + 1);
+        if (x == null)
+            return;
 
-            StdDraw.setPenRadius();
-            if (level % 2 == 0) {
-                StdDraw.setPenColor(StdDraw.RED);
-                StdDraw.line(x.point.x(), x.enclosedRect.ymin(), x.point.x(), x.enclosedRect.ymax());
-            } else {
-                StdDraw.setPenColor(StdDraw.BLUE);
-                StdDraw.line(x.enclosedRect.xmin(), x.point.y(), x.enclosedRect.xmax(), x.point.y());
-            }
+        x.point.draw();
+        draw(x.left);
+        draw(x.right);
+    }
 
-            StdDraw.setPenColor(StdDraw.BLACK);
-            StdDraw.setPenRadius(.01);
-            x.point.draw();
-
-            draw(x.right, level + 1);
-        }
-	}
-	
 	public Iterable<Point2D> range(RectHV rect)
 	{
 		if (rect == null)
